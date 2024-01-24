@@ -14,7 +14,14 @@ class Target:
     def run_game(self):
         """the main game loop"""
         while True:
+            self._check_event()
             self._update_screen()
+            
+    def _check_event(self):
+        """checks for keyboard and mouse events"""
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                sys.exit()
     def _update_screen(self):
         """update and flip screen to the latest frame"""
         self.screen.fill((255, 255, 255))
