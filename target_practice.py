@@ -22,6 +22,14 @@ class Target:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 sys.exit()
+            elif event.type == pygame.KEYDOWN:
+                self._check_keydown_event(event)
+                
+    def _check_keydown_event(self, event):
+        """checks keyboard keydown"""
+        if event.key == pygame.K_q:
+            sys.exit()
+            
     def _update_screen(self):
         """update and flip screen to the latest frame"""
         self.screen.fill((255, 255, 255))
