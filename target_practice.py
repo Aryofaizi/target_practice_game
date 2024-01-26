@@ -1,4 +1,5 @@
 import pygame, sys
+from ship import Ship
 
 
 class Target:
@@ -10,6 +11,9 @@ class Target:
         """initialize screen"""
         self.screen = pygame.display.set_mode((500, 500))
         pygame.display.set_caption("target practice!")
+        
+        # ship instance 
+        self.ship = Ship(self)
         
     def run_game(self):
         """the main game loop"""
@@ -33,8 +37,9 @@ class Target:
     def _update_screen(self):
         """update and flip screen to the latest frame"""
         self.screen.fill((255, 255, 255))
+        self.ship.blit_me()
         pygame.display.flip()
-    
+        
     
     
 if __name__ == "__main__":
