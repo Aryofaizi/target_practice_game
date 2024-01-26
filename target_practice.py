@@ -19,6 +19,7 @@ class Target:
         """the main game loop"""
         while True:
             self._check_event()
+            self.ship.update()
             self._update_screen()
             
     def _check_event(self):
@@ -28,11 +29,24 @@ class Target:
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 self._check_keydown_event(event)
+            elif event.type == pygame.KEYUP:
+                self._check_keyup_event(event)
                 
     def _check_keydown_event(self, event):
         """checks keyboard keydown"""
         if event.key == pygame.K_q:
             sys.exit()
+        elif event.key == pygame.K_DOWN:
+            self.ship.move_down = True
+        elif event.key == pygame.K_UP:
+            self.ship.move_up = True    
+            
+    def _check_keyup_event(self, event):
+        """checks keyboard keyup event"""
+        if event.key == pygame.K_DOWN:
+            self.ship.move_down = False
+        elif event.key == pygame.K_UP:
+            self.ship.move_up = False
             
     def _update_screen(self):
         """update and flip screen to the latest frame"""
