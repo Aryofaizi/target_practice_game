@@ -1,5 +1,6 @@
 import pygame, sys
 from ship import Ship
+from settings import Settings
 
 
 class Target:
@@ -9,11 +10,15 @@ class Target:
     
     def __init__(self):
         """initialize screen"""
-        self.screen = pygame.display.set_mode((500, 500))
+        self.settings = Settings()
+        self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
+        self.settings.screen_width = self.screen.get_width()
+        self.settings.screen_height = self.screen.get_height()
         pygame.display.set_caption("target practice!")
         
         # ship instance 
         self.ship = Ship(self)
+        # settings
         
     def run_game(self):
         """the main game loop"""
