@@ -20,16 +20,15 @@ class Ship:
         self.y = float(self.image_rect.y)
         # set move up and down flags
         self.move_up, self.move_down = False, False
-        
     def blit_me(self):
         """make image visible on screen"""
         self.screen.blit(self.image, self.image_rect)
         
     def update(self):
         """update image coordinate"""
-        if self.move_up:
+        if self.image_rect.top >=0 and self.move_up:
             self.y -=1
-        if self.move_down:
+        if self.image_rect.bottom <= self.screen_rect.bottom and self.move_down:
             self.y +=1
         self.image_rect.y = self.y
 
