@@ -1,15 +1,17 @@
 import pygame, sys
 from ship import Ship
 from settings import Settings
+from target import Target
 
 
-class Target:
+class TargetGame:
     """target practice class a class to represent a 
     rectangle on the edge of the screen as target 
     and a ship for the player to shoot the target with"""
     
     def __init__(self):
         """initialize screen"""
+        pygame.init()
         self.settings = Settings()
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.settings.screen_width = self.screen.get_width()
@@ -18,7 +20,9 @@ class Target:
         
         # ship instance 
         self.ship = Ship(self)
-        # settings
+        
+        # target instance
+        self.target = Target(self)
         
     def run_game(self):
         """the main game loop"""
@@ -57,10 +61,11 @@ class Target:
         """update and flip screen to the latest frame"""
         self.screen.fill((255, 255, 255))
         self.ship.blit_me()
+        self.target.draw_target()
         pygame.display.flip()
         
     
     
 if __name__ == "__main__":
-    game = Target()
+    game = TargetGame()
     game.run_game()
