@@ -2,6 +2,7 @@ import pygame, sys
 from ship import Ship
 from settings import Settings
 from target import Target
+from bullet import Bullet
 
 
 class TargetGame:
@@ -17,12 +18,16 @@ class TargetGame:
         self.settings.screen_width = self.screen.get_width()
         self.settings.screen_height = self.screen.get_height()
         pygame.display.set_caption("target practice!")
-        
         # ship instance 
         self.ship = Ship(self)
         
         # target instance
         self.target = Target(self)
+        
+        # bullet list
+        self.bullets = pygame.sprite.Group()
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
         
     def run_game(self):
         """the main game loop"""
@@ -62,6 +67,8 @@ class TargetGame:
         self.screen.fill((255, 255, 255))
         self.ship.blit_me()
         self.target.draw_target()
+        for bullet in self.bullets:
+            bullet.draw_bullet()
         pygame.display.flip()
         
     
