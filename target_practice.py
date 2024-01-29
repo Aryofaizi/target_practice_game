@@ -26,14 +26,13 @@ class TargetGame:
         
         # bullet list
         self.bullets = pygame.sprite.Group()
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
         
     def run_game(self):
         """the main game loop"""
         while True:
             self._check_event()
             self.ship.update()
+            self.bullets.update()
             self._update_screen()
             
     def _check_event(self):
@@ -54,6 +53,8 @@ class TargetGame:
             self.ship.move_down = True
         elif event.key == pygame.K_UP:
             self.ship.move_up = True    
+        elif event.key == pygame.K_SPACE:
+            self._fire_bullet()
             
     def _check_keyup_event(self, event):
         """checks keyboard keyup event"""
@@ -62,13 +63,22 @@ class TargetGame:
         elif event.key == pygame.K_UP:
             self.ship.move_up = False
             
+    def _fire_bullet(self):
+        """fire bullet by press space key"""
+        new_bullet = Bullet(self)
+        self.bullets.add(new_bullet)
+        
+    def _update_bullet(self):
+        """draw all bullets on screen"""
+        for bullet in self.bullets:
+            bullet.draw_bullet()
+            
     def _update_screen(self):
         """update and flip screen to the latest frame"""
         self.screen.fill((255, 255, 255))
         self.ship.blit_me()
         self.target.draw_target()
-        for bullet in self.bullets:
-            bullet.draw_bullet()
+        self._update_bullet()
         pygame.display.flip()
         
     
