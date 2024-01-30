@@ -67,8 +67,10 @@ class TargetGame:
             
     def _fire_bullet(self):
         """fire bullet by press space key"""
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if not self.settings.limited_bullet <=0:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
+            self.settings.limited_bullet -=1
         
     def _check_hit(self):
         """checks if the bullet hit the target"""
