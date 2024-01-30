@@ -72,6 +72,8 @@ class TargetGame:
         """draw all bullets on screen"""
         for bullet in self.bullets:
             bullet.draw_bullet()
+            if bullet.check_edges():
+                self.bullets.remove(bullet)
             
     def _update_screen(self):
         """update and flip screen to the latest frame"""
