@@ -79,8 +79,8 @@ class TargetGame:
         """update and flip screen to the latest frame"""
         self.screen.fill((255, 255, 255))
         self.ship.blit_me()
-        self.target.draw_target()
         self._update_bullet()
+        self.target.draw_target()
         pygame.display.flip()
         
     
