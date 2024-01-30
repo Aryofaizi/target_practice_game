@@ -11,6 +11,7 @@ class Settings:
         self.bullet_height = 3
         self.bullet_color = (0, 0, 255)
         self.bullet_speed = 1
+        self.limited_bullet = 3
         
         
         # target 

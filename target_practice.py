@@ -34,6 +34,7 @@ class TargetGame:
             self.ship.update()
             self.bullets.update()
             self._update_target()
+            print(self.settings.limited_bullet)
             self._update_screen()
             
     def _check_event(self):
@@ -69,11 +70,21 @@ class TargetGame:
         new_bullet = Bullet(self)
         self.bullets.add(new_bullet)
         
+    def _check_hit(self):
+        """checks if the bullet hit the target"""
+        for bullet in self.bullets.copy():
+            collide = pygame.sprite.collide_rect(bullet, self.target)
+            if collide:
+                self.bullets.remove(bullet)
+                
+        
     def _update_bullet(self):
         """draw all bullets on screen"""
-        for bullet in self.bullets:
+        for bullet in self.bullets.copy():
             bullet.draw_bullet()
+            self._check_hit()
             if bullet.check_edges():
+                self.settings.limited_bullet -= 1
                 self.bullets.remove(bullet)
     
     def _update_target(self):
@@ -88,6 +99,7 @@ class TargetGame:
         self.ship.blit_me()
         self._update_bullet()
         self.target.draw_target()
+        self._check_hit()
         pygame.display.flip()
         
     
