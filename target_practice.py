@@ -33,6 +33,7 @@ class TargetGame:
             self._check_event()
             self.ship.update()
             self.bullets.update()
+            self._update_target()
             self._update_screen()
             
     def _check_event(self):
@@ -74,6 +75,12 @@ class TargetGame:
             bullet.draw_bullet()
             if bullet.check_edges():
                 self.bullets.remove(bullet)
+    
+    def _update_target(self):
+        """update target position"""
+        self.target.move()
+        if self.target.check_edges():
+            self.target.direction *= -1
             
     def _update_screen(self):
         """update and flip screen to the latest frame"""
