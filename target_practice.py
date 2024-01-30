@@ -34,7 +34,7 @@ class TargetGame:
             self.ship.update()
             self.bullets.update()
             self._update_target()
-            print(self.settings.limited_bullet)
+            print(self.settings.missed_bullet)
             self._update_screen()
             
     def _check_event(self):
@@ -86,7 +86,7 @@ class TargetGame:
             bullet.draw_bullet()
             self._check_hit()
             if bullet.check_edges():
-                self.settings.limited_bullet -= 1
+                self.settings.missed_bullet -= 1
                 self.bullets.remove(bullet)
     
     def _update_target(self):
