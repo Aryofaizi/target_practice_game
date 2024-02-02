@@ -3,6 +3,7 @@ from ship import Ship
 from settings import Settings
 from target import Target
 from bullet import Bullet
+from game_stats import Stats
 
 
 class TargetGame:
@@ -14,6 +15,7 @@ class TargetGame:
         """initialize screen"""
         pygame.init()
         self.settings = Settings()
+        self.stats = Stats(self)
         self.screen = pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
         self.settings.screen_width = self.screen.get_width()
         self.settings.screen_height = self.screen.get_height()
@@ -31,10 +33,10 @@ class TargetGame:
         """the main game loop"""
         while True:
             self._check_event()
-            self.ship.update()
-            self.bullets.update()
-            self._update_target()
-            print(self.settings.missed_bullet)
+            if self.stats.game_active:
+                self.ship.update()
+                self.bullets.update()
+                self._update_target()
             self._update_screen()
             
     def _check_event(self):
