@@ -80,10 +80,13 @@ class TargetGame:
             collide = pygame.sprite.collide_rect(bullet, self.target)
             if collide:
                 self.bullets.remove(bullet)
+                self.settings.limited_bullet +=1
                 
         
     def _update_bullet(self):
         """draw all bullets on screen"""
+        if self.settings.missed_bullet <=0:
+            self.stats.game_active = False
         for bullet in self.bullets.copy():
             bullet.draw_bullet()
             self._check_hit()
