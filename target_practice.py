@@ -41,6 +41,7 @@ class TargetGame:
                 self.ship.update()
                 self.bullets.update()
                 self._update_target()
+                pygame.mouse.set_visible(False)
             self._update_screen()
             
     def _check_event(self):
@@ -94,6 +95,7 @@ class TargetGame:
         """draw all bullets on screen"""
         if self.settings.missed_bullet <=0:
             self.stats.game_active = False
+            pygame.mouse.set_visible(True)
             self.play_button.draw_button()
         for bullet in self.bullets.copy():
             bullet.draw_bullet()
