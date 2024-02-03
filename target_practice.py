@@ -52,6 +52,9 @@ class TargetGame:
                 self._check_keydown_event(event)
             elif event.type == pygame.KEYUP:
                 self._check_keyup_event(event)
+            elif event.type == pygame.MOUSEBUTTONDOWN:
+                pos = pygame.mouse.get_pos()
+                self._check_play_button(pos)
                 
     def _check_keydown_event(self, event):
         """checks keyboard keydown"""
@@ -91,6 +94,7 @@ class TargetGame:
         """draw all bullets on screen"""
         if self.settings.missed_bullet <=0:
             self.stats.game_active = False
+            self.play_button.draw_button()
         for bullet in self.bullets.copy():
             bullet.draw_bullet()
             self._check_hit()
@@ -104,6 +108,14 @@ class TargetGame:
         if self.target.check_edges():
             self.target.direction *= -1
             
+    def _check_play_button(self, pos):
+        """check if specified button is clicked"""
+        if self.play_button.rect.collidepoint(pos):
+            self.stats.reset()
+            self.settings.limited_bullet = 3
+            self.settings.missed_bullet = 3
+                
+            
     def _update_screen(self):
         """update and flip screen to the latest frame"""
         self.screen.fill((255, 255, 255))
@@ -111,7 +123,6 @@ class TargetGame:
         self._update_bullet()
         self.target.draw_target()
         self._check_hit()
-        self.play_button.draw_button()
         pygame.display.flip()
         
     
