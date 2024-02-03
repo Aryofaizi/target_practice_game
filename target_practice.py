@@ -110,7 +110,7 @@ class TargetGame:
             
     def _check_play_button(self, pos):
         """check if specified button is clicked"""
-        if self.play_button.rect.collidepoint(pos):
+        if self.play_button.rect.collidepoint(pos) and self.stats.game_active == False:
             self.stats.reset()
             self.settings.limited_bullet = 3
             self.settings.missed_bullet = 3
