@@ -4,6 +4,7 @@ from settings import Settings
 from target import Target
 from bullet import Bullet
 from game_stats import Stats
+from button import Button
 
 
 class TargetGame:
@@ -28,6 +29,9 @@ class TargetGame:
         
         # bullet list
         self.bullets = pygame.sprite.Group()
+        
+        # make play button
+        self.play_button = Button(self, "Play")
         
     def run_game(self):
         """the main game loop"""
@@ -107,6 +111,7 @@ class TargetGame:
         self._update_bullet()
         self.target.draw_target()
         self._check_hit()
+        self.play_button.draw_button()
         pygame.display.flip()
         
     
