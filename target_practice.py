@@ -89,6 +89,8 @@ class TargetGame:
             if collide:
                 self.bullets.remove(bullet)
                 self.settings.limited_bullet +=1
+                # speed up the game every time bullet hits the target
+                self.settings.increase_speed()
                 
         
     def _update_bullet(self):
@@ -97,6 +99,7 @@ class TargetGame:
             self.stats.game_active = False
             pygame.mouse.set_visible(True)
             self.play_button.draw_button()
+            self.settings.initialize_dynamic_settings()
         for bullet in self.bullets.copy():
             bullet.draw_bullet()
             self._check_hit()
