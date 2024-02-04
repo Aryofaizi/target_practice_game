@@ -10,11 +10,24 @@ class Settings:
         self.bullet_width = 15
         self.bullet_height = 3
         self.bullet_color = (0, 0, 255)
-        self.bullet_speed = 1
         self.limited_bullet = 3
         self.missed_bullet = 3
         
+        # a scale to make the game faster
+        self.speedup_scale = 1.1
         
+        self.initialize_dynamic_settings()
+        
+        
+    def initialize_dynamic_settings(self):
+        """initialize dynamic settings"""
+        self.bullet_speed = 1
         # target 
-        self.direction = -1 
         self.target_speed = 0.5
+        self.direction = -1 
+        
+    def increase_speed(self):
+        """to increase speed with every game progress"""
+        self.bullet_speed *= self.speedup_scale
+        self.target_speed *= self.speedup_scale
+        
